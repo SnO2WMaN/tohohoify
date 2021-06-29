@@ -11,6 +11,7 @@ const handler: VercelApiHandler = async (req, res) => {
 
     res.status(200);
     res.setHeader('Content-Type', `image/${option.type}`);
+    res.setHeader('Cache-Control', 'public, max-age=86400');
     res.end(screenshot);
   } catch (error) {
     res.status(500);
