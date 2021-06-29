@@ -41,7 +41,7 @@ export const getCSS = (option: ParsedOptions) => `
     background: var(--balloon-background-color);
     min-width: 3em;
     font-size: var(--balloon-font-size);
-    font-weight: 700;
+    font-family: '${option.font}';
     letter-spacing: 0.05em;
     line-height: var(--balloon-line-height);
     text-align: center;
@@ -68,6 +68,11 @@ export const getHtml = (option: ParsedOptions) => `
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&text=${
+          option.text
+        }&family=${option.font.split(' ').join('+')}">
         <style>${getCSS(option)}</style>
       </head>
       <body>
