@@ -22,7 +22,7 @@ export async function getScreenshot(html: string) {
 
   const page = await browser.newPage();
 
-  await page.setViewport({width: 2048, height: 1170});
+  await page.setViewport({width: 1024, height: 720});
   await page.setContent(html);
   const screenshot = await page.screenshot({type: 'png'});
 

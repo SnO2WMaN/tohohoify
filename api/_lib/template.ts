@@ -1,14 +1,14 @@
-import {Option} from './parser';
+import {ParsedOptions} from './parser';
 
-export const getCSS = (option: Option) => `
+export const getCSS = (option: ParsedOptions) => `
   :root{
     --background-color: black;
-    --icon-size: 96px;
-    --icon-gap: 32px;
+    --icon-size: 20vmin;
+    --icon-gap: 5vmin;
 
     --balloon-background-color: white;
-    --balloon-padding: 16px;
-    --balloon-font-size: 16px;
+    --balloon-padding: 2.5vmin;
+    --balloon-font-size: 4vmin;
     --balloon-line-height: calc(var(--balloon-font-size) * 1.75);
     --balloon-rounded: calc(var(--balloon-padding) + var(--balloon-line-height) / 4)
   }
@@ -39,10 +39,12 @@ export const getCSS = (option: Option) => `
     padding: var(--balloon-padding);
     border-radius: var(--balloon-rounded);
     background: var(--balloon-background-color);
+    min-width: 3em;
+    font-size: var(--balloon-font-size);
     font-weight: 700;
     letter-spacing: 0.05em;
-    font-size: var(--balloon-font-size);
     line-height: var(--balloon-line-height);
+    text-align: center;
   }
 
   #balloon::after{
@@ -61,7 +63,7 @@ export const getCSS = (option: Option) => `
   }
 `;
 
-export const getHtml = (option: Option) => `
+export const getHtml = (option: ParsedOptions) => `
   <html>
       <head>
         <meta charset="utf-8">

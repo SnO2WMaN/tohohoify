@@ -1,10 +1,10 @@
 import {VercelRequest} from '@vercel/node';
 
-export type Option = {
+export type ParsedOptions = {
   icon: string;
   text: string;
 };
-export const parseRequest = ({query}: VercelRequest): Option => {
+export const parseRequest = ({query}: VercelRequest): ParsedOptions => {
   const {icon, text} = query;
 
   if (Array.isArray(icon)) throw new Error('icon must not be array');
