@@ -1,4 +1,5 @@
 import {VercelRequest} from '@vercel/node';
+import escape from 'escape-html';
 
 export type ParsedOptions = {
   icon: string;
@@ -19,9 +20,9 @@ export const parseRequest = ({query}: VercelRequest): ParsedOptions => {
   if (Array.isArray(font)) throw new Error('font must not be array');
 
   return {
-    icon,
-    text,
-    font,
+    icon: escape(icon),
+    text: escape(text),
+    font: escape(font),
     type,
   };
 };
