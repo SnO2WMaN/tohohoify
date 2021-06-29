@@ -1,0 +1,11 @@
+# dependencies
+package-lock.json
+
+# Test
+coverage/
+
+# Next.js
+.next/
+
+# Vercel
+.vercel/

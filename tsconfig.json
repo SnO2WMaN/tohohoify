@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["api/"],
+  "exclude": ["node_modules"]
+}
