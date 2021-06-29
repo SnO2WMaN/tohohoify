@@ -8,7 +8,7 @@ export type ParsedOptions = {
   type: 'png' | 'jpeg';
 };
 export const parseRequest = ({query}: VercelRequest): ParsedOptions => {
-  const {icon, text, font = 'Reggae One', type = 'jpeg'} = query;
+  const {icon, text, font = 'Yusei Magic', type = 'jpeg'} = query;
 
   if (Array.isArray(icon)) throw new Error('icon must not be array');
   if (Array.isArray(text)) throw new Error('text must not be array');
