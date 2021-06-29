@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+package-lock.json
+
+# Test
+coverage/
+
+# env
+.env.local
+!.env.local.template
+
+# OS
+.DS_Store
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+.vercel
+
+# Next.js
+.next/
+
+# Vercel
+.vercel/
+
+# ESLint
+.eslintcache

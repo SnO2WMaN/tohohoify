@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      run: yarn run lint:eslint
+    prettier:
+      run: yarn run lint:prettier
