@@ -1,3 +1,4 @@
+// ?text=test&icon=1" onerror="location.href='https://www.google.com/'
 import {ParsedOptions} from './parser';
 
 export const getCSS = (option: ParsedOptions) => `
