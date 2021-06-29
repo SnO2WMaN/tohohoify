@@ -1,5 +1,6 @@
 import chrome from 'chrome-aws-lambda';
 import core from 'puppeteer-core';
+import {ParsedOptions} from './parser';
 
 export const getBrowserOption = async () =>
   // eslint-disable-next-line no-process-env
@@ -16,7 +17,7 @@ export const getBrowserOption = async () =>
         headless: true,
       };
 
-export async function getScreenshot(html: string) {
+export async function getScreenshot(html: string, option: ParsedOptions) {
   const browserOptions = await getBrowserOption();
   const browser = await core.launch(browserOptions);
 
@@ -24,7 +25,7 @@ export async function getScreenshot(html: string) {
 
   await page.setViewport({width: 1024, height: 720});
   await page.setContent(html);
-  const screenshot = await page.screenshot({type: 'png'});
+  const screenshot = await page.screenshot({type: option.type});
 
   await browser.close();
   return screenshot;

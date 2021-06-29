@@ -7,10 +7,10 @@ const handler: VercelApiHandler = async (req, res) => {
   try {
     const option = parseRequest(req);
     const html = getHtml(option);
-    const screenshot = await getScreenshot(html);
+    const screenshot = await getScreenshot(html, option);
 
     res.status(200);
-    res.setHeader('Content-Type', `image/png`);
+    res.setHeader('Content-Type', `image/${option.type}`);
     res.end(screenshot);
   } catch (error) {
     res.status(500);
