@@ -15,6 +15,22 @@ https://tohohoify.vercel.app/api?text=<text>&icon=<url>[&font=<font>]
 - `<font>`
   - Font in [Google Fonts](https://fonts.google.com/).
 
+## Development
+
+Pass the environment variable `CHROME_EXECUTABLE_PATH`
+
+```dotenv
+# linux (example)
+
+CHROME_EXECUTABLE_PATH="/usr/bin/google-chrome-stable"
+```
+
+```bash
+yarn
+
+vercel dev # npm i -g vercel
+```
+
 ## License
 
 [![GitHub](https://img.shields.io/github/license/SnO2WMaN/tohohoify)](https://github.com/SnO2WMaN/tohohoify/blob/main/LICENSE)
