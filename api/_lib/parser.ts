@@ -6,7 +6,7 @@ export type ParsedOptions = {
   text: string;
   font: string;
   type: 'png' | 'jpeg';
-  fontSize: string;
+  fontSize: number;
 };
 export const parseRequest = ({query}: VercelRequest): ParsedOptions => {
   const {
@@ -14,7 +14,7 @@ export const parseRequest = ({query}: VercelRequest): ParsedOptions => {
     text,
     font = 'Yusei Magic',
     type = 'jpeg',
-    fontSize = '4vmin',
+    fontSize = '4',
   } = query;
 
   if (Array.isArray(icon)) throw new Error('icon must not be array');
@@ -25,13 +25,21 @@ export const parseRequest = ({query}: VercelRequest): ParsedOptions => {
     throw new Error('type must be "png" or "jpeg"');
 
   if (Array.isArray(font)) throw new Error('font must not be array');
+
   if (Array.isArray(fontSize)) throw new Error('fontSize must not be array');
+  let fontSizeNum: number;
+  try {
+    fontSizeNum = parseFloat(fontSize);
+  } catch (err) {
+    throw new Error('parse error (fontSize)');
+  }
+  if (!isFinite(fontSizeNum)) throw new Error('fontSize must be number');
 
   return {
     icon: escape(icon),
     text: escape(text),
     font: escape(font),
     type,
-    fontSize,
+    fontSize: fontSizeNum,
   };
 };
