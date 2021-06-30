@@ -5,7 +5,7 @@ export async function getScreenshot(html: string, option: ParsedOptions) {
   const browser = await chrome.puppeteer.launch({
     args: chrome.args,
     executablePath: await chrome.executablePath,
-    headless: chrome.headless,
+    headless: true,
   });
 
   const page = await browser.newPage();
