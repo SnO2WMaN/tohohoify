@@ -14,6 +14,11 @@ const handler: VercelApiHandler = async (req, res) => {
     res.setHeader('Cache-Control', 'public, max-age=86400');
     res.end(screenshot);
   } catch (error) {
+    // eslint-disable-next-line no-process-env
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
     res.status(500);
     res.end();
   }
