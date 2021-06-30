@@ -2,7 +2,7 @@
   "name": "irisout",
   "private": true,
   "scripts": {
-    "dev": "vercel dev",
+    "vercel-dev": "vercel dev",
     "ts-check": "tsc --noEmit",
     "lint": "scripty",
     "lint:eslint": "scripty",
