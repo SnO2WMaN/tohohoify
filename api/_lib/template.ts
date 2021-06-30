@@ -9,7 +9,7 @@ export const getCSS = (option: ParsedOptions) => `
 
     --balloon-background-color: white;
     --balloon-padding: 2.5vmin;
-    --balloon-font-size: 4vmin;
+    --balloon-font-size: ${option.fontSize};
     --balloon-line-height: calc(var(--balloon-font-size) * 1.75);
     --balloon-rounded: calc(var(--balloon-padding) + var(--balloon-line-height) / 4)
   }
