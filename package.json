@@ -30,7 +30,6 @@
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.6",
     "@babel/core": "^7.14.6",
-    "@next/eslint-plugin-next": "^11.0.1",
     "@shopify/eslint-plugin": "^40.2.3",
     "@shopify/prettier-config": "^1.1.2",
     "@types/escape-html": "^1.0.1",
@@ -39,6 +38,7 @@
     "@types/sanitize-html": "^2.3.1",
     "@vercel/node": "^1.11.1",
     "eslint": "^7.29.0",
+    "eslint-config-next": "^11.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "1.1.1",
