@@ -30,6 +30,7 @@
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.6",
     "@babel/core": "^7.14.6",
+    "@next/eslint-plugin-next": "^11.0.1",
     "@shopify/eslint-plugin": "^40.2.3",
     "@shopify/prettier-config": "^1.1.2",
     "@types/escape-html": "^1.0.1",
