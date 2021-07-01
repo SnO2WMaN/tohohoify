@@ -3,7 +3,4 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  rewrites() {
-    return [{source: '/badges/:path*', destination: '/api/:path*'}];
-  },
 };
