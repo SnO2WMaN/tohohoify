@@ -1,9 +1,26 @@
 {
   "root": true,
-  "extends": ["plugin:@shopify/typescript", "plugin:@shopify/prettier"],
+  "extends": [
+    "plugin:@shopify/typescript",
+    "plugin:@shopify/react",
+    "plugin:@shopify/prettier"
+  ],
   "rules": {
     "import/order": [0],
     "@typescript-eslint/consistent-type-definitions": [2, "type"],
     "@typescript-eslint/consistent-indexed-object-style": [2, "record"]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["next-env.d.ts"],
+      "rules": {
+        "spaced-comment": [0],
+        "@typescript-eslint/triple-slash-reference": [0]
+      }
+    },
+    {
+      "files": ["*.config.js"],
+      "extends": ["plugin:@shopify/node"]
+    }
+  ]
 }

@@ -3,6 +3,9 @@
   "private": true,
   "scripts": {
     "vercel-dev": "vercel dev",
+    "dev": "next -p 3000",
+    "build": "next build",
+    "start": "next start",
     "ts-check": "tsc --noEmit",
     "lint": "scripty",
     "lint:eslint": "scripty",
@@ -16,8 +19,12 @@
   },
   "dependencies": {
     "chrome-aws-lambda": "^10.0.0",
+    "clsx": "^1.1.1",
     "escape-html": "^1.0.3",
+    "next": "^11.0.1",
     "puppeteer-core": "^10.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "sanitize-html": "^2.4.0"
   },
   "devDependencies": {
@@ -27,9 +34,10 @@
     "@shopify/prettier-config": "^1.1.2",
     "@types/escape-html": "^1.0.1",
     "@types/puppeteer-core": "^5.4.0",
+    "@types/react": "^17.0.11",
     "@types/sanitize-html": "^2.3.1",
     "@vercel/node": "^1.11.1",
-    "eslint": "7.22.0",
+    "eslint": "^7.29.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "1.1.1",
