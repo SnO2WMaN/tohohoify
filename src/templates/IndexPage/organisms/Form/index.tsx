@@ -7,7 +7,7 @@ import {
   IconText,
 } from '~/components/atoms/Icon';
 import {useImageBaseUrl} from '~/hooks/useBaseUrl';
-import {Input} from '../../molecules/Input';
+import {InputLabel, InputText} from '../../molecules/Input';
 
 export const Form: React.VFC<{
   className?: string;
@@ -54,40 +54,52 @@ export const Form: React.VFC<{
         ['gap-y-8', 'md:gap-y-4'],
       )}
     >
-      <Input
+      <label
         className={clsx(['col-span-full', 'lg:col-span-4'])}
-        id="icon"
-        labelText="Icon URL"
-        value={iconUrl}
-        handleChange={(event) => {
-          setIconUrl(event.target.value);
-        }}
-        Icon={IconIcon}
-      />
-      <Input
+        htmlFor="icon-url"
+      >
+        <InputLabel labelText="Icon URL" Icon={IconIcon} />
+        <InputText
+          className={clsx(['mt-2'])}
+          id="icon-url"
+          labelText="Icon URL"
+          value={iconUrl}
+          handleChange={(value) => setIconUrl(value)}
+        />
+      </label>
+      <label
         className={clsx(['col-span-full', 'lg:col-span-2'])}
-        id="text"
-        labelText="Text"
-        value={text}
-        handleChange={(event) => setText(event.target.value)}
-        Icon={IconText}
-      />
-      <Input
-        className={clsx(['col-span-2'])}
-        id="font-family"
-        labelText="Font Family"
-        value={fontFamily}
-        handleChange={(event) => setFontFamily(event.target.value)}
-        Icon={IconFontFamily}
-      />
-      <Input
-        className={clsx(['col-span-1'])}
-        id="font-size"
-        labelText="Font Size"
-        value={fontSize}
-        handleChange={(event) => setFontSize(event.target.value)}
-        Icon={IconFontSize}
-      />
+        htmlFor="text"
+      >
+        <InputLabel labelText="Text" Icon={IconText} />
+        <InputText
+          className={clsx(['mt-2'])}
+          id="text"
+          labelText="Text"
+          value={text}
+          handleChange={(value) => setText(value)}
+        />
+      </label>
+      <label className={clsx(['col-span-2'])} htmlFor="font-family">
+        <InputLabel labelText="Font Family" Icon={IconFontFamily} />
+        <InputText
+          className={clsx(['mt-2'])}
+          id="font-family"
+          labelText="Font Family"
+          value={fontFamily}
+          handleChange={(value) => setFontSize(value)}
+        />
+      </label>
+      <label className={clsx(['col-span-1'])} htmlFor="font-size">
+        <InputLabel labelText="Font Size" Icon={IconFontSize} />
+        <InputText
+          className={clsx(['mt-2'])}
+          id="font-size"
+          labelText="Font Size"
+          value={fontSize}
+          handleChange={(value) => setFontSize(value)}
+        />
+      </label>
     </form>
   );
 };
