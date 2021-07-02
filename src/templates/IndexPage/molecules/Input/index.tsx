@@ -30,9 +30,12 @@ export const InputText: React.VFC<{
       ['rounded'],
       ['px-4'],
       ['py-2'],
+      ['bg-white'],
       'border',
-      ['border-gray-400'],
+      ['border-gray-200'],
+      ['text-gray-900'],
       ['text-sm'],
+      ['shadow-lg'],
     )}
     value={value}
     onChange={(event) => {

@@ -7,6 +7,8 @@ import {
   IconText,
 } from '~/components/atoms/Icon';
 import {useImageBaseUrl} from '~/hooks/useBaseUrl';
+import {FontFamily} from '~/libs/fonts';
+import {FontSelector} from '../../molecules/FontSelector';
 import {InputLabel, InputText} from '../../molecules/Input';
 
 export const Form: React.VFC<{
@@ -18,14 +20,14 @@ export const Form: React.VFC<{
     'https://github.com/SnO2WMaN.png',
   );
   const [text, setText] = useState<string>('トホホ…');
-  const [fontFamily, setFontFamily] = useState<string>('Yusei Magic');
+  const [fontFamily, setFontFamily] = useState<FontFamily>('Yusei Magic');
   const [fontSize, setFontSize] = useState<string>('4');
 
   const url = useMemo(() => {
     const url = new URL(baseUrl);
     url.searchParams.set('icon', iconUrl);
     url.searchParams.set('text', text);
-    if (fontFamily !== '') url.searchParams.set('font', fontFamily);
+    url.searchParams.set('font', fontFamily);
     if (fontSize !== '') url.searchParams.set('fontSize', fontSize);
     return url.toString();
   }, [baseUrl, iconUrl, text, fontFamily, fontSize]);
@@ -82,12 +84,12 @@ export const Form: React.VFC<{
       </label>
       <label className={clsx(['col-span-2'])} htmlFor="font-family">
         <InputLabel labelText="Font Family" Icon={IconFontFamily} />
-        <InputText
+        <FontSelector
           className={clsx(['mt-2'])}
           id="font-family"
           labelText="Font Family"
           value={fontFamily}
-          handleChange={(value) => setFontSize(value)}
+          handleChange={(value) => setFontFamily(value)}
         />
       </label>
       <label className={clsx(['col-span-1'])} htmlFor="font-size">

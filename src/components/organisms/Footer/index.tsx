@@ -5,7 +5,7 @@ export const Footer: React.VFC<{className?: string}> = ({className}) => (
   <footer
     className={clsx(
       className,
-      ['px-4', 'py-8'],
+      ['px-4', 'py-16'],
       ['border-t'],
       ['border-gray-300'],
       ['flex', 'justify-end'],
