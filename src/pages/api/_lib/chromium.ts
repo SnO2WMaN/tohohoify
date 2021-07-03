@@ -10,7 +10,7 @@ export async function getScreenshot(html: string, option: ParsedOptions) {
 
   const page = await browser.newPage();
 
-  await page.setViewport({width: 1024, height: 720});
+  await page.setViewport({width: 1376, height: 720});
   await page.setContent(html, {waitUntil: 'networkidle0'});
   const screenshot = await page.screenshot({type: option.type});
 
