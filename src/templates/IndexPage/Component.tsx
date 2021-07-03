@@ -62,7 +62,7 @@ export const Component: React.VFC<ComponentProps> = ({
                 Image URL
               </h2>
             </div>
-            <Clipboard className={clsx(['mt-2'])} url={imageUrl} />
+            <Clipboard className={clsx(['mt-2'], 'shadow-xl')} url={imageUrl} />
           </div>
           <div className={clsx('col-span-1')}>
             <div className={clsx('pl-2', 'flex', 'items-center')}>
@@ -72,13 +72,17 @@ export const Component: React.VFC<ComponentProps> = ({
               </h2>
             </div>
             <div className={clsx('mt-2', ['flex', 'items-center'])}>
-              <Clipboard className={clsx(['flex-grow'])} url={shareUrl} />
+              <Clipboard
+                className={clsx(['flex-grow'], 'shadow-xl')}
+                url={shareUrl}
+              />
               <div className={clsx('ml-4', 'flex')}>
                 <SocialButtonTwitter
                   href={socialUrls.twitter}
                   className={clsx(
                     ['w-10', 'h-10'],
                     ['bg-twitter-1', 'text-white', 'text-lg'],
+                    'shadow-xl',
                   )}
                 />
               </div>
