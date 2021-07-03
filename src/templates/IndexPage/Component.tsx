@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import {IconLink, IconShare} from '~/components/atoms/Icon';
 import {FontFamily} from '~/libs/fonts';
+import {SocialButtonTwitter} from './atoms/SocialButton';
 import {Clipboard} from './organisms/Clipboard';
 import {Form} from './organisms/Form';
 
@@ -10,6 +11,7 @@ export type ComponentProps = {
   className?: string;
   imageUrl?: string;
   shareUrl?: string;
+  socialUrls: Record<'twitter', string | undefined>;
   handleImageUrl(value: string): void;
   handleShareUrl(value: string): void;
   defaultValues: {
@@ -23,6 +25,7 @@ export const Component: React.VFC<ComponentProps> = ({
   className,
   imageUrl,
   shareUrl,
+  socialUrls,
   handleShareUrl,
   handleImageUrl,
   defaultValues,
@@ -68,7 +71,18 @@ export const Component: React.VFC<ComponentProps> = ({
                 Share
               </h2>
             </div>
-            <Clipboard className={clsx(['mt-2'])} url={shareUrl} />
+            <div className={clsx('mt-2', ['flex', 'items-center'])}>
+              <Clipboard className={clsx(['flex-grow'])} url={shareUrl} />
+              <div className={clsx('ml-4', 'flex')}>
+                <SocialButtonTwitter
+                  href={socialUrls.twitter}
+                  className={clsx(
+                    ['w-10', 'h-10'],
+                    ['bg-twitter-1', 'text-white', 'text-lg'],
+                  )}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <Form

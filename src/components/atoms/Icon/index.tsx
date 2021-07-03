@@ -1,3 +1,4 @@
+import {faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {
   faFont,
   faImage,
@@ -36,4 +37,8 @@ export const IconShare: React.VFC<{className?: string}> = ({className}) => (
     icon={faShareSquare}
     fixedWidth
   />
+);
+
+export const IconTwitter: React.VFC<{className?: string}> = ({className}) => (
+  <FontAwesomeIcon className={clsx(className)} icon={faTwitter} fixedWidth />
 );
