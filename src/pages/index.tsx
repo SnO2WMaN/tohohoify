@@ -81,11 +81,10 @@ export const Page: NextPage<PageProps> = ({
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tohohoify.vercel.app" />
         <meta name="twitter:title" content="tohohoify" />
-        <meta name="twitter:site" content="@SnO2WMaN" />
+        <meta name="twitter:creator" content="@SnO2WMaN" />
         {!(icon && text) && (
           <>
             <meta property="og:description" content="トホホ…" />
-            <meta property="twitter:description" content="トホホ…" />
             <meta name="twitter:card" content="summary" />
           </>
         )}
@@ -96,12 +95,7 @@ export const Page: NextPage<PageProps> = ({
               property="og:image"
               content={urlBuilder({icon, text, ...{font}, ...{fontSize}})}
             />
-            <meta name="twitter:description" content={text} />
-            <meta name="twitter:card" content="photo" />
-            <meta
-              property="twitter:image"
-              content={urlBuilder({icon, text, ...{font}, ...{fontSize}})}
-            />
+            <meta name="twitter:card" content="summary_large_image" />
           </>
         )}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
