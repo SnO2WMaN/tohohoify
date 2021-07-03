@@ -25,3 +25,5 @@ export const fontFamilies = [
 ] as const;
 
 export type FontFamily = typeof fontFamilies[number];
+export const isValidFontFamily = (value: string): value is FontFamily =>
+  fontFamilies.includes(value as any);

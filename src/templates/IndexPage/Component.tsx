@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
+import {FontFamily} from '~/libs/fonts';
 import {Clipboard} from './organisms/Clipboard';
 import {Form} from './organisms/Form';
 
@@ -8,11 +9,18 @@ export type ComponentProps = {
   className?: string;
   url?: string;
   onUrl(value: string): void;
+  defaultValues: {
+    icon?: string;
+    text?: string;
+    font?: FontFamily;
+    fontSize?: string;
+  };
 };
 export const Component: React.VFC<ComponentProps> = ({
   className,
   url,
   onUrl,
+  defaultValues,
 }) => {
   return (
     <main className={clsx(className, ['px-4', 'sm:px-2', 'lg:px-0'])}>
@@ -31,6 +39,7 @@ export const Component: React.VFC<ComponentProps> = ({
         <Form
           className={clsx(['mt-6'], ['max-w-screen-lg'], ['mx-auto'])}
           onUrl={onUrl}
+          defaultValues={defaultValues}
         />
       </section>
     </main>

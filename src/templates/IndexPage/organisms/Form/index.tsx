@@ -6,7 +6,7 @@ import {
   IconIcon,
   IconText,
 } from '~/components/atoms/Icon';
-import {useImageBaseUrl} from '~/hooks/useBaseUrl';
+import {useImageUrlBuilder} from '~/hooks/useImageUrlBuilder';
 import {FontFamily} from '~/libs/fonts';
 import {FontSelector} from '../../molecules/FontSelector';
 import {InputLabel, InputText} from '../../molecules/Input';
@@ -14,23 +14,30 @@ import {InputLabel, InputText} from '../../molecules/Input';
 export const Form: React.VFC<{
   className?: string;
   onUrl(value: string): void;
-}> = ({className, onUrl}) => {
-  const baseUrl = useImageBaseUrl();
-  const [iconUrl, setIconUrl] = useState<string>(
-    'https://github.com/SnO2WMaN.png',
-  );
-  const [text, setText] = useState<string>('トホホ…');
-  const [fontFamily, setFontFamily] = useState<FontFamily>('Yusei Magic');
-  const [fontSize, setFontSize] = useState<string>('4');
+  defaultValues: {
+    icon?: string;
+    text?: string;
+    font?: FontFamily;
+    fontSize?: string;
+  };
+}> = ({className, onUrl, defaultValues}) => {
+  const urlBuilder = useImageUrlBuilder();
 
-  const url = useMemo(() => {
-    const url = new URL(baseUrl);
-    url.searchParams.set('icon', iconUrl);
-    url.searchParams.set('text', text);
-    url.searchParams.set('font', fontFamily);
-    if (fontSize !== '') url.searchParams.set('fontSize', fontSize);
-    return url.toString();
-  }, [baseUrl, iconUrl, text, fontFamily, fontSize]);
+  const [iconUrl, setIconUrl] = useState<string>(
+    defaultValues?.icon ?? 'https://github.com/SnO2WMaN.png',
+  );
+  const [text, setText] = useState<string>(defaultValues?.text ?? 'トホホ…');
+  const [fontFamily, setFontFamily] = useState<FontFamily>(
+    defaultValues?.font ?? 'Yusei Magic',
+  );
+  const [fontSize, setFontSize] = useState<string>(
+    defaultValues?.fontSize ?? '4',
+  );
+
+  const url = useMemo(
+    () => urlBuilder({icon: iconUrl, text, font: fontFamily, fontSize}),
+    [urlBuilder, iconUrl, text, fontFamily, fontSize],
+  );
 
   useEffect(
     () => {
