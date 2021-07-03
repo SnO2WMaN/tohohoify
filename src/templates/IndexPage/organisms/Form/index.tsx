@@ -97,7 +97,7 @@ export const Form: React.VFC<{
           handleChange={(value) => setText(value)}
         />
       </label>
-      <label className={clsx(['col-span-2'])} htmlFor="font-family">
+      <label className={clsx(['col-span-3'])} htmlFor="font-family">
         <InputLabel labelText="Font Family" Icon={IconFontFamily} />
         <FontSelector
           className={clsx(['mt-2'])}

@@ -15,7 +15,11 @@ export const Plain: React.VFC<{
   handleChange(text: FontFamily): void;
 }> = ({className, id, labelText, value, handleChange}) => {
   return (
-    <details className={clsx(className, 'relative')}>
+    <details
+      id={id}
+      aria-label={labelText}
+      className={clsx(className, 'relative')}
+    >
       <summary
         className={clsx(
           ['rounded'],
@@ -32,64 +36,65 @@ export const Plain: React.VFC<{
         {value}
       </summary>
       <div
+        role="listbox"
         className={clsx(
-          ['absolute'],
-          ['w-full'],
-          ['h-32'],
-          ['top-full'],
-          ['mt-1'],
-          'border',
-          ['border-gray-200'],
-          'overflow-y-scroll',
           ['shadow-lg'],
           ['z-50'],
+          ['absolute'],
+          ['top-full'],
+          ['mt-1'],
+          ['w-full'],
+          ['h-32'],
+          ['flex', 'flex-col'],
+          ['overflow-y-auto'],
+          ['divide-y'],
+          ['scroll-snap-y-mandatory'],
         )}
       >
-        <div role="listbox" className={clsx(['divide-y'])}>
-          {fontFamilies.map((family) => (
-            <div
-              key={family}
-              role="option"
-              tabIndex={0}
-              aria-selected={value === family}
+        {fontFamilies.map((family) => (
+          <div
+            key={family}
+            role="option"
+            tabIndex={0}
+            aria-selected={value === family}
+            className={clsx(
+              ['px-4'],
+              ['py-2'],
+              ['flex', 'items-center'],
+              'cursor-pointer',
+              ['group'],
+              ['bg-white', 'hover:bg-blue-500'],
+              ['scroll-snap-align-center'],
+            )}
+            onClick={() => handleChange(family)}
+            onKeyPress={() => handleChange(family)}
+          >
+            <SampleText
               className={clsx(
-                ['px-4'],
-                ['py-2'],
-                ['flex', 'items-center'],
-                'cursor-pointer',
-                ['group'],
-                ['bg-white', 'hover:bg-blue-500'],
+                'text-lg',
+                ['group-hover:text-white'],
+                ['text-gray-900'],
+                ['text-lg'],
+                ['select-none'],
               )}
-              onClick={() => handleChange(family)}
-              onKeyPress={() => handleChange(family)}
+              fontFamily={family}
             >
-              <SampleText
-                className={clsx(
-                  'text-lg',
-                  ['group-hover:text-white'],
-                  ['text-gray-900'],
-                  ['text-lg'],
-                  ['select-none'],
-                )}
-                fontFamily={family}
-              >
-                サンプル
-              </SampleText>
-              <span
-                className={clsx(
-                  ['ml-2'],
-                  ['group-hover:text-white'],
-                  'flex-grow',
-                  ['text-gray-500'],
-                  ['text-xs'],
-                  'text-right',
-                )}
-              >
-                {family}
-              </span>
-            </div>
-          ))}
-        </div>
+              サンプル
+            </SampleText>
+            <span
+              className={clsx(
+                ['ml-2'],
+                ['group-hover:text-white'],
+                'flex-grow',
+                ['text-gray-500'],
+                ['text-xs'],
+                'text-right',
+              )}
+            >
+              {family}
+            </span>
+          </div>
+        ))}
       </div>
     </details>
   );
