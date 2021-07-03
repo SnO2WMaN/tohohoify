@@ -18,6 +18,7 @@ export const Container: React.VFC<ContainerProps> = ({defaultValues}) => {
     if (shareUrl) {
       const url = new URL('http://twitter.com/share');
       url.searchParams.set('url', shareUrl);
+      url.searchParams.set('hashtags', 'tohohoify');
       return url.toString();
     } else return undefined;
   }, [shareUrl]);
