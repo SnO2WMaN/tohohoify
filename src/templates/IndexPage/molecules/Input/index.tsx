@@ -7,10 +7,8 @@ export const InputLabel: React.VFC<{
   Icon: React.VFC<{className?: string}>;
 }> = ({className, Icon, labelText}) => (
   <div className={clsx(className, ['flex', 'items-center'], ['pl-2'])}>
-    <Icon className={clsx('text-md', ['text-blue-400'])} />
-    <span className={clsx('ml-2', 'text-md', ['text-gray-500'])}>
-      {labelText}
-    </span>
+    <Icon className={clsx(['text-blue-400'])} />
+    <span className={clsx('ml-2', ['text-gray-500'])}>{labelText}</span>
   </div>
 );
 

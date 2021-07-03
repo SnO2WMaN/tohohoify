@@ -6,22 +6,24 @@ import {
   IconIcon,
   IconText,
 } from '~/components/atoms/Icon';
-import {useImageUrlBuilder} from '~/hooks/useImageUrlBuilder';
+import {useImageUrlBuilder, useShareUrlBuilder} from '~/hooks/useUrlBuilder';
 import {FontFamily} from '~/libs/fonts';
 import {FontSelector} from '../../molecules/FontSelector';
 import {InputLabel, InputText} from '../../molecules/Input';
 
 export const Form: React.VFC<{
   className?: string;
-  onUrl(value: string): void;
+  handleImageUrl(value: string): void;
+  handleShareUrl(value: string): void;
   defaultValues: {
     icon?: string;
     text?: string;
     font?: FontFamily;
     fontSize?: string;
   };
-}> = ({className, onUrl, defaultValues}) => {
-  const urlBuilder = useImageUrlBuilder();
+}> = ({className, handleImageUrl, handleShareUrl, defaultValues}) => {
+  const imageUrlBuilder = useImageUrlBuilder();
+  const shareUrlBuilder = useShareUrlBuilder();
 
   const [iconUrl, setIconUrl] = useState<string>(
     defaultValues?.icon ?? 'https://github.com/SnO2WMaN.png',
@@ -34,24 +36,30 @@ export const Form: React.VFC<{
     defaultValues?.fontSize ?? '4',
   );
 
-  const url = useMemo(
-    () => urlBuilder({icon: iconUrl, text, font: fontFamily, fontSize}),
-    [urlBuilder, iconUrl, text, fontFamily, fontSize],
+  const imageUrl = useMemo(
+    () => imageUrlBuilder({icon: iconUrl, text, font: fontFamily, fontSize}),
+    [imageUrlBuilder, iconUrl, text, fontFamily, fontSize],
+  );
+  const shareUrl = useMemo(
+    () => shareUrlBuilder({icon: iconUrl, text, font: fontFamily, fontSize}),
+    [shareUrlBuilder, iconUrl, text, fontFamily, fontSize],
   );
 
   useEffect(
     () => {
-      onUrl(url);
+      handleImageUrl(imageUrl);
+      handleShareUrl(shareUrl);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
   useEffect(() => {
     const timeout = setTimeout(() => {
-      onUrl(url);
+      handleImageUrl(imageUrl);
+      handleShareUrl(shareUrl);
     }, 1000);
     return () => clearTimeout(timeout);
-  }, [onUrl, url]);
+  }, [handleImageUrl, handleShareUrl, imageUrl, shareUrl]);
 
   return (
     <form

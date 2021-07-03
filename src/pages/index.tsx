@@ -1,7 +1,7 @@
 import {GetServerSideProps, NextPage} from 'next';
 import Head from 'next/head';
 import React from 'react';
-import {useImageUrlBuilder} from '~/hooks/useImageUrlBuilder';
+import {useImageUrlBuilder} from '~/hooks/useUrlBuilder';
 import {fontFamilies, FontFamily, isValidFontFamily} from '~/libs/fonts';
 import {IndexPage} from '~/templates/IndexPage';
 

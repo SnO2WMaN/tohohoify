@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {FontFamily} from '~/libs/fonts';
 import {Component} from './Component';
 
@@ -11,12 +11,24 @@ export type ContainerProps = {
   };
 };
 export const Container: React.VFC<ContainerProps> = ({defaultValues}) => {
-  const [url, setUrl] = useState<string | undefined>();
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const [shareUrl, setShareUrl] = useState<string | undefined>();
+
+  const tweetUrl = useMemo(() => {
+    if (shareUrl) {
+      const url = new URL('http://twitter.com/share');
+      url.searchParams.set('url', shareUrl);
+      return url.toString();
+    } else return undefined;
+  }, [shareUrl]);
 
   return (
     <Component
-      url={url}
-      onUrl={(value) => setUrl(value)}
+      imageUrl={imageUrl}
+      shareUrl={shareUrl}
+      socialUrls={{twitter: tweetUrl}}
+      handleImageUrl={(value) => setImageUrl(value)}
+      handleShareUrl={(value) => setShareUrl(value)}
       defaultValues={defaultValues}
     />
   );
