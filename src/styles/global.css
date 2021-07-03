@@ -13,5 +13,13 @@
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
     }
+
+    .scroll-snap-align-center {
+      scroll-snap-align: center;
+    }
+
+    .scroll-snap-y-mandatory {
+      scroll-snap-type: y mandatory;
+    }
   }
 }
