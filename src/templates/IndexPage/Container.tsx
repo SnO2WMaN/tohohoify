@@ -11,12 +11,15 @@ export type ContainerProps = {
   };
 };
 export const Container: React.VFC<ContainerProps> = ({defaultValues}) => {
-  const [url, setUrl] = useState<string | undefined>();
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const [shareUrl, setShareUrl] = useState<string | undefined>();
 
   return (
     <Component
-      url={url}
-      onUrl={(value) => setUrl(value)}
+      imageUrl={imageUrl}
+      shareUrl={shareUrl}
+      handleImageUrl={(value) => setImageUrl(value)}
+      handleShareUrl={(value) => setShareUrl(value)}
       defaultValues={defaultValues}
     />
   );

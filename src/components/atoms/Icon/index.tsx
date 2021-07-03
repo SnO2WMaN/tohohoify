@@ -1,6 +1,8 @@
 import {
   faFont,
   faImage,
+  faLink,
+  faShareSquare,
   faSignature,
   faTextHeight,
 } from '@fortawesome/free-solid-svg-icons';
@@ -22,4 +24,16 @@ export const IconFontFamily: React.VFC<{className?: string}> = ({
 
 export const IconFontSize: React.VFC<{className?: string}> = ({className}) => (
   <FontAwesomeIcon className={clsx(className)} icon={faTextHeight} fixedWidth />
+);
+
+export const IconLink: React.VFC<{className?: string}> = ({className}) => (
+  <FontAwesomeIcon className={clsx(className)} icon={faLink} fixedWidth />
+);
+
+export const IconShare: React.VFC<{className?: string}> = ({className}) => (
+  <FontAwesomeIcon
+    className={clsx(className)}
+    icon={faShareSquare}
+    fixedWidth
+  />
 );
