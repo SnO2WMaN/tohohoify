@@ -1,28 +1,9 @@
-import {NextPage} from 'next';
+import {GetServerSideProps, NextPage} from 'next';
 import Head from 'next/head';
 import React from 'react';
 import {useImageUrlBuilder} from '~/hooks/useImageUrlBuilder';
-import {useParametersFromURL} from '~/hooks/useParametersFromURL';
-import {fontFamilies} from '~/libs/fonts';
+import {fontFamilies, FontFamily, isValidFontFamily} from '~/libs/fonts';
 import {IndexPage} from '~/templates/IndexPage';
-
-export const useOGP = () => {
-  const urlBuilder = useImageUrlBuilder();
-  const {icon, text, font, fontSize} = useParametersFromURL();
-
-  if (icon && text) {
-    return {
-      description: text,
-      image: urlBuilder({
-        icon,
-        text,
-        ...{font},
-        ...{fontSize},
-      }),
-    };
-  }
-  return null;
-};
 
 export const useGoogleFontsHref = () => {
   const baseUrl = new URL('https://fonts.googleapis.com/css2');
@@ -37,9 +18,59 @@ export const useGoogleFontsHref = () => {
   };
 };
 
-export type PageProps = Record<string, never>;
-export const Page: NextPage<PageProps> = ({...props}) => {
-  const ogp = useOGP();
+export type UrlQuery = {
+  icon?: string;
+  text?: string;
+  font?: string;
+  fontSize?: string;
+};
+export type PageProps = {
+  icon?: string;
+  text?: string;
+  font?: FontFamily;
+  fontSize?: string;
+};
+
+export const getServerSideProps: GetServerSideProps<
+  UrlQuery,
+  PageProps
+> = async ({query}) => {
+  return {
+    props: {
+      ...{
+        icon:
+          query.icon && typeof query.icon === 'string' ? query.icon : undefined,
+      },
+      ...{
+        text:
+          query.text && typeof query.text === 'string' ? query.text : undefined,
+      },
+      ...{
+        font:
+          query.font &&
+          typeof query.font === 'string' &&
+          isValidFontFamily(query.font)
+            ? query.font
+            : undefined,
+      },
+      ...{
+        fontSize:
+          query.fontSize && typeof query.fontSize === 'string'
+            ? query.fontSize
+            : undefined,
+      },
+    },
+  };
+};
+
+export const Page: NextPage<PageProps> = ({
+  icon,
+  text,
+  font,
+  fontSize,
+  ...props
+}) => {
+  const urlBuilder = useImageUrlBuilder();
   const googleFonts = useGoogleFontsHref();
 
   return (
@@ -51,19 +82,26 @@ export const Page: NextPage<PageProps> = ({...props}) => {
         <meta property="og:url" content="https://tohohoify.vercel.app" />
         <meta name="twitter:title" content="tohohoify" />
         <meta name="twitter:site" content="@SnO2WMaN" />
-        {!ogp && (
+        {!(icon && text) && (
           <>
             <meta property="og:description" content="トホホ…" />
             <meta property="twitter:description" content="トホホ…" />
+            <meta name="twitter:card" content="summary" />
           </>
         )}
-        {ogp && (
+        {icon && text && (
           <>
-            <meta property="og:description" content={ogp.description} />
-            <meta property="og:image" content={ogp.image} />
+            <meta property="og:description" content={text} />
+            <meta
+              property="og:image"
+              content={urlBuilder({icon, text, ...{font}, ...{fontSize}})}
+            />
+            <meta name="twitter:description" content={text} />
             <meta name="twitter:card" content="photo" />
-            <meta name="twitter:description" content={ogp.description} />
-            <meta property="twitter:image" content={ogp.image} />
+            <meta
+              property="twitter:image"
+              content={urlBuilder({icon, text, ...{font}, ...{fontSize}})}
+            />
           </>
         )}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,7 +112,14 @@ export const Page: NextPage<PageProps> = ({...props}) => {
         />
         <link href={googleFonts('サンプル')} rel="stylesheet" />
       </Head>
-      <IndexPage />
+      <IndexPage
+        defaultValues={{
+          icon,
+          text,
+          font,
+          fontSize,
+        }}
+      />
     </>
   );
 };

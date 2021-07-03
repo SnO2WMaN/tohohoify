@@ -7,7 +7,6 @@ import {
   IconText,
 } from '~/components/atoms/Icon';
 import {useImageUrlBuilder} from '~/hooks/useImageUrlBuilder';
-import {useParametersFromURL} from '~/hooks/useParametersFromURL';
 import {FontFamily} from '~/libs/fonts';
 import {FontSelector} from '../../molecules/FontSelector';
 import {InputLabel, InputText} from '../../molecules/Input';
@@ -15,16 +14,25 @@ import {InputLabel, InputText} from '../../molecules/Input';
 export const Form: React.VFC<{
   className?: string;
   onUrl(value: string): void;
-}> = ({className, onUrl}) => {
+  defaultValues: {
+    icon?: string;
+    text?: string;
+    font?: FontFamily;
+    fontSize?: string;
+  };
+}> = ({className, onUrl, defaultValues}) => {
   const urlBuilder = useImageUrlBuilder();
-  const fromURL = useParametersFromURL();
 
   const [iconUrl, setIconUrl] = useState<string>(
-    'https://github.com/SnO2WMaN.png',
+    defaultValues?.icon ?? 'https://github.com/SnO2WMaN.png',
   );
-  const [text, setText] = useState<string>('トホホ…');
-  const [fontFamily, setFontFamily] = useState<FontFamily>('Yusei Magic');
-  const [fontSize, setFontSize] = useState<string>('4');
+  const [text, setText] = useState<string>(defaultValues?.text ?? 'トホホ…');
+  const [fontFamily, setFontFamily] = useState<FontFamily>(
+    defaultValues?.font ?? 'Yusei Magic',
+  );
+  const [fontSize, setFontSize] = useState<string>(
+    defaultValues?.fontSize ?? '4',
+  );
 
   const url = useMemo(
     () => urlBuilder({icon: iconUrl, text, font: fontFamily, fontSize}),
@@ -38,18 +46,6 @@ export const Form: React.VFC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
-  useEffect(() => {
-    if (fromURL.icon) setIconUrl(fromURL.icon);
-  }, [fromURL.icon]);
-  useEffect(() => {
-    if (fromURL.text) setText(fromURL.text);
-  }, [fromURL.text]);
-  useEffect(() => {
-    if (fromURL.font) setFontFamily(fromURL.font);
-  }, [fromURL.font]);
-  useEffect(() => {
-    if (fromURL.fontSize) setFontSize(fromURL.fontSize);
-  }, [fromURL.fontSize]);
   useEffect(() => {
     const timeout = setTimeout(() => {
       onUrl(url);
