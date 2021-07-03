@@ -1,54 +1,23 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
-import {useRouter} from 'next/router';
 import React from 'react';
-import {useImageBaseUrl} from '~/hooks/useBaseUrl';
+import {useImageUrlBuilder} from '~/hooks/useImageUrlBuilder';
+import {useParametersFromURL} from '~/hooks/useParametersFromURL';
 import {fontFamilies} from '~/libs/fonts';
 import {IndexPage} from '~/templates/IndexPage';
 
-export const useImageUrlBuilder = () => {
-  const baseUrl = useImageBaseUrl();
-  return ({
-    icon,
-    text,
-    font,
-    fontSize,
-  }: {
-    icon: string;
-    text: string;
-    font?: string;
-    fontSize?: string;
-  }) => {
-    const url = new URL(baseUrl);
-    url.searchParams.set('icon', icon);
-    url.searchParams.set('text', text);
-    if (font) url.searchParams.set('font', font);
-    if (fontSize) url.searchParams.set('fontSize', fontSize);
-    return url.toString();
-  };
-};
-
 export const useOGP = () => {
   const urlBuilder = useImageUrlBuilder();
-  const {query} = useRouter();
+  const {icon, text, font, fontSize} = useParametersFromURL();
 
-  if (
-    query.icon &&
-    typeof query.icon === 'string' &&
-    query.text &&
-    typeof query.text === 'string'
-  ) {
+  if (icon && text) {
     return {
-      description: query.text,
+      description: text,
       image: urlBuilder({
-        icon: query.icon,
-        text: query.text,
-        font:
-          query.font && typeof query.font === 'string' ? query.font : undefined,
-        fontSize:
-          query.fontSize && typeof query.fontSize === 'string'
-            ? query.fontSize
-            : undefined,
+        icon,
+        text,
+        ...{font},
+        ...{fontSize},
       }),
     };
   }
@@ -78,9 +47,14 @@ export const Page: NextPage<PageProps> = ({...props}) => {
       <Head>
         <title>tohohoify</title>
         <meta property="og:title" content="tohohoify" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tohohoify.vercel.app" />
+        <meta name="twitter:title" content="tohohoify" />
+        <meta name="twitter:site" content="@SnO2WMaN" />
         {!ogp && (
           <>
             <meta property="og:description" content="トホホ…" />
+            <meta property="twitter:description" content="トホホ…" />
           </>
         )}
         {ogp && (
@@ -88,6 +62,8 @@ export const Page: NextPage<PageProps> = ({...props}) => {
             <meta property="og:description" content={ogp.description} />
             <meta property="og:image" content={ogp.image} />
             <meta name="twitter:card" content="photo" />
+            <meta name="twitter:description" content={ogp.description} />
+            <meta property="twitter:image" content={ogp.image} />
           </>
         )}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
