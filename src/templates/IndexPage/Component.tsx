@@ -27,7 +27,13 @@ export const Component: React.VFC<ComponentProps> = ({
       <section className={clsx(['w-full'], ['h-96'])}>
         <div className={clsx(['w-full'], ['h-full'], ['relative'])}>
           {url && (
-            <Image src={url} layout="fill" objectFit="contain" unoptimized />
+            <Image
+              src={url}
+              title="tohohoify generate image"
+              layout="fill"
+              objectFit="contain"
+              unoptimized
+            />
           )}
         </div>
       </section>

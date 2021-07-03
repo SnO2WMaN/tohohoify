@@ -25,6 +25,7 @@ export const Component: React.VFC<ComponentProps> = ({
     )}
     onClick={handleClick}
   >
+    <span className={clsx('sr-only')}>Clipboard Copy</span>
     <FontAwesomeIcon
       icon={faClipboard}
       className={clsx(['text-lg'], 'text-white')}
