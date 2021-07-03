@@ -32,7 +32,7 @@ export const Component: React.VFC<ComponentProps> = ({
 }) => {
   return (
     <main className={clsx(className, ['px-4', 'sm:px-2', 'lg:px-0'])}>
-      <section className={clsx(['w-full'], ['h-96'])}>
+      <section className={clsx(['w-full'], ['h-64', 'sm:h-72', 'md:h-96'])}>
         <div className={clsx(['w-full'], ['h-full'], ['relative'])}>
           {imageUrl && (
             <Image
@@ -53,6 +53,7 @@ export const Component: React.VFC<ComponentProps> = ({
             ['grid'],
             ['grid-cols-1', 'lg:grid-cols-2'],
             ['gap-x-6'],
+            ['gap-y-4'],
           )}
         >
           <div className={clsx('col-span-1')}>
